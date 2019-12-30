@@ -16,12 +16,12 @@ class ComposerStaticInit5e9c0bc8ebb49537b5b871f118fd597e
     public static $prefixDirsPsr4 = array (
         'Digthis\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/inc',
+            0 => __DIR__ . '/../..' . '/src',
         ),
     );
 
     public static $classMap = array (
-        'Digthis\\AdminArea\\Admin' => __DIR__ . '/../..' . '/inc/AdminArea/Admin.php',
+        'Digthis\\AdminArea\\Admin' => __DIR__ . '/../..' . '/src/AdminArea/Admin.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

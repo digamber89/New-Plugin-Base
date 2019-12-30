@@ -46,7 +46,7 @@ class Admin {
 	}
 
 	public function generate_admin_page() {
-		require_once( PLUGIN_DIR . '/templates/admin.php' );
+		require_once( PLUGIN_DIR . '/templates/AdminArea/admin.php' );
 	}
 
 	/**

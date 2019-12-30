@@ -6,5 +6,5 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Digthis\\AdminArea\\Admin' => $baseDir . '/inc/AdminArea/Admin.php',
+    'Digthis\\AdminArea\\Admin' => $baseDir . '/src/AdminArea/Admin.php',
 );

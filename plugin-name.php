@@ -23,9 +23,11 @@ if ( ! defined( 'PLUGIN_DIR' ) ) {
 	define( 'PLUGIN_DIR', DIRNAME( __FILE__ ) );
 }
 
+function digthis_load_admin_settings(){
+	 $adminArea = new Digthis\AdminArea\Admin();
+}
+
 if ( file_exists( PLUGIN_DIR . '/vendor/autoload.php' ) ) {
 	require_once PLUGIN_DIR . '/vendor/autoload.php';
-	add_action('plugins_loaded',function(){
-		new Digthis\AdminArea\Admin();
-	});
+	add_action('plugins_loaded','digthis_load_admin_settings');
 }

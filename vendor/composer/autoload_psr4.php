@@ -6,5 +6,5 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Digthis\\' => array($baseDir . '/inc'),
+    'Digthis\\' => array($baseDir . '/src'),
 );
