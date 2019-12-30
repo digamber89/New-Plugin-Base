@@ -27,9 +27,9 @@
 		?>
     </div>
 	<?php
-	if ( ! empty( $_GET['tab'] ) || $_GET['tab'] == 'settings' ) {
+	if (  empty( $_GET['tab'] ) || $_GET['tab'] == 'settings' ) {
 		require_once( PLUGIN_DIR . '/templates/AdminArea/settings.php' );
-	} elseif ( empty( $_GET['tab'] ) && $_GET['tab'] == 'check-balance' ) {
+	} elseif ( !empty( $_GET['tab'] ) && $_GET['tab'] == 'check-balance' ) {
 		require_once( PLUGIN_DIR . '/templates/AdminArea/more-settings.php' );
 	}
 	?>
