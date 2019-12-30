@@ -1,0 +1,17 @@
+{
+  "name": "digthis/plugin-base",
+  "description": "Plugin Base",
+  "type": "project",
+  "license": "GPL2",
+  "authors": [
+    {
+      "name": "digamber",
+      "email": "digamberpradhan89@gmail.com"
+    }
+  ],
+  "minimum-stability": "dev",
+  "require": {},
+  "autoload": {
+    "psr-4": {"Digthis\\": "src/"}
+  }
+}
