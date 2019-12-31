@@ -10,10 +10,6 @@ License: http://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html
 Text Domain: plugin-text-domain
 */
 
-/**
- * Define Plugin FILE PATH
- */
-
 defined( 'ABSPATH' ) or die( 'Script Kiddies Go Away' );
 
 if ( ! defined( 'PLUGIN_FILE_PATH' ) ) {

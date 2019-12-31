@@ -1,5 +1,5 @@
 <div class="wrap">
-    <h2>Plugin Settings Header</h2>
+    <h2><?php _e('Plugin Settings Header','plugin-text-domain'); ?></h2>
     <h2 class="nav-tab-wrapper">
 		<?php do_action( 'add_settings_tab' ); ?>
         <a href="<?php echo add_query_arg( array(
@@ -7,14 +7,14 @@
 			'tab'  => 'settings'
 		), admin_url( 'admin.php' ) ); ?>"
            class="nav-tab <?php if ( ! ! empty( $_GET['tab'] ) || 'settings' === $_GET['tab'] ): ?> nav-tab-active<?php endif; ?>">
-			<?php _e( 'Settings 1', 'digthis-plugin-textdomain' ); ?>
+			<?php _e( 'Settings 1', 'plugin-text-domain' ); ?>
         </a>
         <a href="<?php echo add_query_arg( array(
 			'page' => $this->plugin_url,
 			'tab'  => 'check-balance'
 		), admin_url( 'admin.php' ) ); ?>"
            class="nav-tab <?php if ( ! empty( $_GET['tab'] ) && 'check-balance' === $_GET['tab'] ): ?> nav-tab-active<?php endif; ?>">
-			<?php _e( 'Settings 2', 'digthis-plugin-textdomain' ); ?>
+			<?php _e( 'Settings 2', 'plugin-text-domain' ); ?>
         </a>
     </h2>
     <div class="message">

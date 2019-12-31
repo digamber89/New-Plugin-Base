@@ -15,6 +15,7 @@ class Admin {
 	 * @return Admin
 	 */
 	public static function get_instance() {
+		__('You are here','digthis-plugin-textdomain');
 		if ( ! isset( self::$instance ) ) {
 			self::$instance = new self;
 		}
