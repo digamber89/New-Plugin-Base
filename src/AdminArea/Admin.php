@@ -1,4 +1,5 @@
 <?php
+
 namespace Digthis\AdminArea;
 /**
  * Class plugin_admin
@@ -7,6 +8,7 @@ class Admin {
 	public static $instance;
 	public $settings = '';
 	public $plugin_url = 'plugin-url';
+	public $menu_page = '';
 	private $message = null;
 
 	/**
@@ -28,21 +30,32 @@ class Admin {
 		$this->load_dependencies();
 		add_action( 'admin_menu', array( $this, 'admin_menu_page' ) );
 		add_action( 'admin_init', array( $this, 'save_settings' ) );
+		add_action( 'admin_enqueue_scripts', [ $this, 'load_scripts' ] );
 
-	}
-
-	public function load_dependencies() {
 	}
 
 	public function admin_menu_page() {
-		add_menu_page(
+		$this->menu_page = add_menu_page(
 			'Plugin Title',
 			'Plugin Dashboard Title',
 			'manage_options',
 			$this->plugin_url,
 			array( $this, 'generate_admin_page' )
 		);
+		//var_dump($menu_page); die;
 
+	}
+
+	public function load_scripts($hook_suffix) {
+		$assets_url = plugins_url( '/assets/', PLUGIN_FILE_PATH );
+		wp_register_script( 'plugin-admin-script', $assets_url . '/js/admin.js', [ 'jquery' ], '1.0.0', true );
+
+		if($hook_suffix == $this->menu_page){
+			wp_enqueue_script('plugin-admin-script');
+		}
+	}
+
+	public function load_dependencies() {
 	}
 
 	public function generate_admin_page() {
