@@ -1,9 +1,7 @@
 <?php
 
 namespace Digthis\Frontend;
-
-use Digthis\Helpers\templates;
-use function Digthis\Helpers\plugin_routing;
+;
 
 class Shortcodes {
 	public static $count;
@@ -33,7 +31,7 @@ class Shortcodes {
 		);
 		$posts      = new \WP_Query( $query_args );
 		if ( $posts->have_posts() ) {
-			templates::get_instance()->include_file('shortcode.php', array( 'posts' => $posts) );
+			digthisPluginBase()->templating->include_file( 'shortcode.php', [ 'posts' => $posts  ] );
 		}
 	}
 }

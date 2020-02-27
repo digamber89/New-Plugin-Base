@@ -3,7 +3,6 @@
 
 namespace Digthis\Helpers;
 
-
 class templates {
 	public $theme_folder = 'plugin-base';
 	public $template_dir = PLUGIN_DIR . '/templates/';
@@ -35,6 +34,3 @@ class templates {
 	}
 }
 
-function plugin_routing() {
-	return templates::get_instance();
-}

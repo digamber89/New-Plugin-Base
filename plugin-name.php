@@ -23,6 +23,7 @@ final class pluginName {
 	const VERSION = '1.0.0';
 	public static $_instance = null;
 	private $admin_area = null;
+	public $templating = null;
 
 	/**
 	 * @return pluginName|null
@@ -40,7 +41,7 @@ final class pluginName {
 	 */
 	public function __construct() {
 		$this->autoload();
-
+		$this->templating = \Digthis\Helpers\templates::get_instance();
 		add_action( 'plugins_loaded', array( $this, 'admin_init' ) );
 	}
 
@@ -58,4 +59,8 @@ final class pluginName {
 
 }
 
-pluginName::get_instance();
+function digthisPluginBase() {
+	return pluginName::get_instance();
+}
+
+digthisPluginBase();
