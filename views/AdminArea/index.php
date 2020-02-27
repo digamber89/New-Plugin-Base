@@ -1,4 +1,12 @@
 <div class="wrap">
+    <div class="message">
+		<?php
+		$message = $this->get_message();
+		if ( ! empty( $message ) && ! empty( $message ) ) {
+			echo $message;
+		}
+		?>
+    </div>
     <h2><?php _e('Plugin Settings Header','plugin-text-domain'); ?></h2>
     <h2 class="nav-tab-wrapper">
 		<?php do_action( 'add_settings_tab' ); ?>
@@ -17,15 +25,7 @@
 			<?php _e( 'Settings 2', 'plugin-text-domain' ); ?>
         </a>
     </h2>
-    <div class="message">
-		<?php
-		$message = $this->get_message();
-		if ( ! empty( $message ) && ! empty( $message ) ) {
-			echo $message;
-		}
 
-		?>
-    </div>
 	<?php
 	if (  empty( $_GET['tab'] ) || $_GET['tab'] == 'settings' ) {
 		require_once( PLUGIN_DIR . '/views/AdminArea/settings.php' );

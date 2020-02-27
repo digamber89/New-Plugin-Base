@@ -5,7 +5,7 @@ namespace Digthis\AdminArea;
  * Class plugin_admin
  */
 class Admin {
-	public static $instance;
+	public static $instance = null;
 	public $settings = '';
 	public $plugin_url = 'plugin-url';
 	public $menu_page = '';
@@ -15,8 +15,7 @@ class Admin {
 	 * @return Admin
 	 */
 	public static function get_instance() {
-		__('You are here','digthis-plugin-textdomain');
-		if ( ! isset( self::$instance ) ) {
+		if ( is_null( self::$instance ) ) {
 			self::$instance = new self;
 		}
 
@@ -28,7 +27,6 @@ class Admin {
 	 */
 	public function __construct() {
 		/*load dependencies if required*/
-		$this->load_dependencies();
 		add_action( 'admin_menu', array( $this, 'admin_menu_page' ) );
 		add_action( 'admin_init', array( $this, 'save_settings' ) );
 		add_action( 'admin_enqueue_scripts', [ $this, 'load_scripts' ] );
@@ -47,20 +45,23 @@ class Admin {
 
 	}
 
-	public function load_scripts($hook_suffix) {
+	/**
+	 * @param $hook_suffix
+	 */
+	public function load_scripts( $hook_suffix ) {
 		$assets_url = plugins_url( '/assets/', PLUGIN_FILE_PATH );
 		wp_register_script( 'plugin-admin-script', $assets_url . '/js/admin.js', [ 'jquery' ], '1.0.0', true );
 
-		if($hook_suffix == $this->menu_page){
-			wp_enqueue_script('plugin-admin-script');
+		if ( $hook_suffix == $this->menu_page ) {
+			wp_enqueue_script( 'plugin-admin-script' );
 		}
 	}
 
-	public function load_dependencies() {
-	}
-
+	/**
+	 *
+	 */
 	public function generate_admin_page() {
-		require_once( PLUGIN_DIR . '/views/AdminArea/admin.php' );
+		require_once( PLUGIN_DIR . '/views/AdminArea/index.php' );
 	}
 
 	/**
@@ -72,22 +73,32 @@ class Admin {
 			if ( ! current_user_can( 'manage_options' ) ) {
 				return;
 			}
-			$config = array();
-			if ( ! empty( $_POST['email'] ) && ! empty( $_POST['email'] ) ) {
-				$config['email'] = $_POST['email'];
-			}
-			if ( ! empty( $_POST['api-key'] ) && ! empty( $_POST['api-key'] ) ) {
-				$config['api-key'] = $_POST['api-key'];
-			}
+			$config            = array();
+			$config['email']   = filter_input( INPUT_POST, 'email' );
+			$config['api-key'] = filter_input( INPUT_POST, 'api-key' );
 			update_option( 'my_plugin_settings', $config );
-			$this->set_message( 'updated', 'Settings Saved' );
+			$this->set_message( 'success', 'Settings Saved' );
 		}
 
 		$this->settings = get_option( 'my_plugin_settings' );
 	}
 
-	public function set_message( $class, $message ) {
-		$this->message = '<div class=' . $class . '>' . $message . '</div>';
+	/**
+	 * @param string $type
+	 * @param string $message
+	 */
+	public function set_message( $type = '', $message = '' ) {
+
+		$class = array(
+			'error'   => 'notice error',
+			'success' => 'notice updated'
+		);
+
+		if ( ! array_key_exists( $type, $class ) ) {
+			return;
+		}
+
+		$this->message = '<div class="' . $class[ $type ] . '"><p>' . $message . '</p></div>';
 	}
 
 	public function get_message() {

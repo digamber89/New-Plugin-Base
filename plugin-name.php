@@ -13,17 +13,48 @@ Text Domain: plugin-text-domain
 defined( 'ABSPATH' ) or die( 'Script Kiddies Go Away' );
 
 if ( ! defined( 'PLUGIN_FILE_PATH' ) ) {
-	define( 'PLUGIN_FILE_PATH', __FILE__ );
+				define( 'PLUGIN_FILE_PATH', __FILE__ );
 }
 if ( ! defined( 'PLUGIN_DIR' ) ) {
 	define( 'PLUGIN_DIR', DIRNAME( __FILE__ ) );
 }
 
-function digthis_load_admin_settings(){
-	 $adminArea = new Digthis\AdminArea\Admin();
+final class pluginName {
+	const VERSION = '1.0.0';
+	public static $_instance = null;
+	private $admin_area = null;
+
+	/**
+	 * @return pluginName|null
+	 */
+	public static function get_instance() {
+		if ( is_null( self::$_instance ) ) {
+			self::$_instance = new self();
+		}
+
+		return self:: $_instance;
+	}
+
+	/**
+	 * pluginName constructor.
+	 */
+	public function __construct() {
+		$this->autoload();
+
+		add_action('plugins_loaded',array($this,'admin_init'));
+	}
+
+	/**
+	 * Autoload - PSR 4 Compliance
+	 */
+	public function autoload() {
+		require_once PLUGIN_DIR . '/vendor/autoload.php';
+	}
+
+	public function admin_init() {
+		$admin_area = new Digthis\AdminArea\Admin();
+	}
+
 }
 
-if ( file_exists( PLUGIN_DIR . '/vendor/autoload.php' ) ) {
-	require_once PLUGIN_DIR . '/vendor/autoload.php';
-	add_action('plugins_loaded','digthis_load_admin_settings');
-}
+pluginName::get_instance();
