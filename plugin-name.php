@@ -13,7 +13,7 @@ Text Domain: plugin-text-domain
 defined( 'ABSPATH' ) or die( 'Script Kiddies Go Away' );
 
 if ( ! defined( 'PLUGIN_FILE_PATH' ) ) {
-				define( 'PLUGIN_FILE_PATH', __FILE__ );
+	define( 'PLUGIN_FILE_PATH', __FILE__ );
 }
 if ( ! defined( 'PLUGIN_DIR' ) ) {
 	define( 'PLUGIN_DIR', DIRNAME( __FILE__ ) );
@@ -41,7 +41,7 @@ final class pluginName {
 	public function __construct() {
 		$this->autoload();
 
-		add_action('plugins_loaded',array($this,'admin_init'));
+		add_action( 'plugins_loaded', array( $this, 'admin_init' ) );
 	}
 
 	/**
@@ -53,6 +53,7 @@ final class pluginName {
 
 	public function admin_init() {
 		$admin_area = new Digthis\AdminArea\Admin();
+		new \Digthis\Frontend\Shortcodes();
 	}
 
 }
