@@ -7,7 +7,7 @@ namespace Digthis\AdminArea;
 class Admin {
 	public static $instance = null;
 	public $settings = '';
-	public $plugin_url = 'plugin-url';
+	public $admin_page_url = 'plugin-url';
 	public $menu_page = '';
 	private $message = null;
 
@@ -28,8 +28,10 @@ class Admin {
 	public function __construct() {
 		/*load dependencies if required*/
 		add_action( 'admin_menu', array( $this, 'admin_menu_page' ) );
-		add_action( 'admin_init', array( $this, 'save_settings' ) );
-		add_action( 'admin_enqueue_scripts', [ $this, 'load_scripts' ] );
+		add_action( 'admin_init', array( $this, 'save_settings' ), 10 );
+		//Priority for the settings objects need to be done after the fact
+		add_action( 'admin_init', array( $this, 'setSettings' ), 20 );
+		add_action( 'admin_enqueue_scripts', array( $this, 'load_scripts' ) );
 
 	}
 
@@ -38,7 +40,7 @@ class Admin {
 			'Plugin Title',
 			'Plugin Dashboard Title',
 			'manage_options',
-			$this->plugin_url,
+			$this->admin_page_url,
 			array( $this, 'generate_admin_page' )
 		);
 		//var_dump($menu_page); die;
@@ -68,19 +70,31 @@ class Admin {
 	 *
 	 */
 	public function save_settings() {
-		if ( ! empty( $_POST['plugin_settings_nonce'] ) && wp_verify_nonce( $_POST['plugin_settings_nonce'], 'verify_plugin_settings_nonce' ) ) {
-			/*Bail Early*/
-			if ( ! current_user_can( 'manage_options' ) ) {
-				return;
-			}
-			$config            = array();
-			$config['email']   = filter_input( INPUT_POST, 'email' );
-			$config['api-key'] = filter_input( INPUT_POST, 'api-key' );
-			update_option( 'my_plugin_settings', $config );
-			$this->set_message( 'success', 'Settings Saved' );
+		$nonce = filter_input( INPUT_POST, 'plugin_settings_nonce' );
+
+		/*Bail Early*/
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return;
 		}
 
-		$this->settings = get_option( 'my_plugin_settings' );
+		if ( empty( $nonce ) ) {
+			return;
+		}
+
+		if ( ! wp_verify_nonce( $_POST['plugin_settings_nonce'], 'verify_plugin_settings_nonce' ) ) {
+			return;
+		}
+
+		$config          = array();
+		$config['email'] = filter_input( INPUT_POST, 'email' );
+		$config['api-key'] = filter_input( INPUT_POST, 'api-key' );
+		if ( empty( $config['email'] ) ) {
+			$this->set_message( 'error', 'Error - email cannot be empty' );
+			return; 
+		}
+		update_option( 'my_plugin_settings', $config );
+		$this->set_message( 'success', 'Settings Saved' );
+
 	}
 
 	/**
@@ -103,6 +117,10 @@ class Admin {
 
 	public function get_message() {
 		return $this->message;
+	}
+
+	public function setSettings() {
+		$this->settings = get_option( 'my_plugin_settings' );
 	}
 
 }
