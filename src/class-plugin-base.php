@@ -1,13 +1,13 @@
 <?php
 
-final class pluginName {
+final class base {
 	const VERSION = '1.0.0';
 	public static $_instance = null;
 	private $admin_area = null;
 	public $templating = null;
 
 	/**
-	 * @return pluginName|null
+	 * @return base|null
 	 */
 	public static function get_instance() {
 		if ( is_null( self::$_instance ) ) {
@@ -41,7 +41,7 @@ final class pluginName {
 }
 
 function digthisPluginBase() {
-	return pluginName::get_instance();
+	return base::get_instance();
 }
 
 digthisPluginBase();
