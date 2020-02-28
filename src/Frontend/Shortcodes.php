@@ -1,7 +1,6 @@
 <?php
 
-namespace Digthis\Frontend;
-;
+namespace Digthis\PluginBase\Frontend;
 
 class Shortcodes {
 	public static $count;

@@ -1,23 +1,4 @@
 <?php
-/*
-Plugin Name: Plugin Base Digamber
-Description: My Plugin Description Goes Here
-Plugin URI: URI goes here
-Author: Digamber Pradhan
-Author URI: https://www.digamberpradhan.com/
-Version: 1.0
-License: http://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html
-Text Domain: plugin-text-domain
-*/
-
-defined( 'ABSPATH' ) or die( 'Script Kiddies Go Away' );
-
-if ( ! defined( 'PLUGIN_FILE_PATH' ) ) {
-	define( 'PLUGIN_FILE_PATH', __FILE__ );
-}
-if ( ! defined( 'PLUGIN_DIR' ) ) {
-	define( 'PLUGIN_DIR', DIRNAME( __FILE__ ) );
-}
 
 final class pluginName {
 	const VERSION = '1.0.0';
@@ -41,7 +22,7 @@ final class pluginName {
 	 */
 	public function __construct() {
 		$this->autoload();
-		$this->templating = \Digthis\Helpers\templates::get_instance();
+		$this->templating = \Digthis\PluginBase\Helpers\templates::get_instance();
 		add_action( 'plugins_loaded', array( $this, 'admin_init' ) );
 	}
 
@@ -53,8 +34,8 @@ final class pluginName {
 	}
 
 	public function admin_init() {
-		$admin_area = new Digthis\AdminArea\Admin();
-		new \Digthis\Frontend\Shortcodes();
+		$this->admin_area = new \Digthis\PluginBase\AdminArea\Admin();
+		new \Digthis\PluginBase\Frontend\Shortcodes();
 	}
 
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Digthis\AdminArea;
+namespace Digthis\PluginBase\AdminArea;
 /**
  * Class plugin_admin
  */

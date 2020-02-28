@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Digthis\Helpers;
+namespace Digthis\PluginBase\Helpers;
 
 class templates {
 	public $theme_folder = 'plugin-base';

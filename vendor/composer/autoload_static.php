@@ -9,19 +9,15 @@ class ComposerStaticInit5e9c0bc8ebb49537b5b871f118fd597e
     public static $prefixLengthsPsr4 = array (
         'D' => 
         array (
-            'Digthis\\' => 8,
+            'Digthis\\PluginBase\\' => 19,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'Digthis\\' => 
+        'Digthis\\PluginBase\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
         ),
-    );
-
-    public static $classMap = array (
-        'Digthis\\AdminArea\\Admin' => __DIR__ . '/../..' . '/src/AdminArea/Admin.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
@@ -29,7 +25,6 @@ class ComposerStaticInit5e9c0bc8ebb49537b5b871f118fd597e
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit5e9c0bc8ebb49537b5b871f118fd597e::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit5e9c0bc8ebb49537b5b871f118fd597e::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit5e9c0bc8ebb49537b5b871f118fd597e::$classMap;
 
         }, null, ClassLoader::class);
     }
