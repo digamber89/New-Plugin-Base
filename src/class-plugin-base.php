@@ -2,7 +2,7 @@
 
 final class base {
 	const VERSION = '1.0.0';
-	const MINIMUM_PHP_VERSION = '5.6';
+	const MINIMUM_PHP_VERSION = '7.4';
 	public static $_instance = null;
 	private $admin_area = null;
 	public $templating = null;
@@ -22,12 +22,12 @@ final class base {
 	 * pluginName constructor.
 	 */
 	public function __construct() {
-		$this->autoload();
 		if ( version_compare( PHP_VERSION, self::MINIMUM_PHP_VERSION, '<' ) ) {
 			add_action( 'admin_notices', [ $this, 'admin_notice_minimum_php_version' ] );
 
 			return;
 		}
+		$this->autoload();
 		$this->templating = \Digthis\PluginBase\Helpers\templates::get_instance();
 
 		add_action( 'plugins_loaded', array( $this, 'admin_init' ) );
@@ -35,8 +35,9 @@ final class base {
 
 	public function admin_notice_minimum_php_version() {
 
-		if ( isset( $_GET['activate'] ) ) unset( $_GET['activate'] );
-
+		if ( isset( $_GET['activate'] ) ) {
+			unset( $_GET['activate'] );
+		}
 		$message = sprintf(
 		/* translators: 1: Plugin name 2: PHP 3: Required PHP version */
 			esc_html__( '"%1$s" requires "%2$s" version %3$s or greater.', 'plugin-base' ),
