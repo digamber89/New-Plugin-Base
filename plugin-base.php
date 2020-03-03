@@ -7,7 +7,7 @@ Author: Digamber Pradhan
 Author URI: https://www.digamberpradhan.com/
 Version: 1.0
 License: http://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html
-Text Domain: plugin-text-domain
+Text Domain: plugin-base
 */
 
 defined( 'ABSPATH' ) or die( 'Script Kiddies Go Away' );

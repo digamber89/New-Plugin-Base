@@ -2,6 +2,7 @@
 
 final class base {
 	const VERSION = '1.0.0';
+	const MINIMUM_PHP_VERSION = '5.6';
 	public static $_instance = null;
 	private $admin_area = null;
 	public $templating = null;
@@ -22,8 +23,30 @@ final class base {
 	 */
 	public function __construct() {
 		$this->autoload();
+		if ( version_compare( PHP_VERSION, self::MINIMUM_PHP_VERSION, '<' ) ) {
+			add_action( 'admin_notices', [ $this, 'admin_notice_minimum_php_version' ] );
+
+			return;
+		}
 		$this->templating = \Digthis\PluginBase\Helpers\templates::get_instance();
+
 		add_action( 'plugins_loaded', array( $this, 'admin_init' ) );
+	}
+
+	public function admin_notice_minimum_php_version() {
+
+		if ( isset( $_GET['activate'] ) ) unset( $_GET['activate'] );
+
+		$message = sprintf(
+		/* translators: 1: Plugin name 2: PHP 3: Required PHP version */
+			esc_html__( '"%1$s" requires "%2$s" version %3$s or greater.', 'plugin-base' ),
+			'<strong>' . esc_html__( 'Plugin Base', 'plugin-base' ) . '</strong>',
+			'<strong>' . esc_html__( 'PHP', 'plugin-base' ) . '</strong>',
+			self::MINIMUM_PHP_VERSION
+		);
+
+		printf( '<div class="notice notice-warning is-dismissible"><p>%1$s</p></div>', $message );
+
 	}
 
 	/**
