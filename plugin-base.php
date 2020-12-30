@@ -19,4 +19,4 @@ if ( ! defined( 'PLUGIN_DIR' ) ) {
 	define( 'PLUGIN_DIR', DIRNAME( __FILE__ ) );
 }
 
-require_once PLUGIN_DIR . '/src/class-plugin-base.php';
+require_once PLUGIN_DIR . '/src/Bootstrap.php';

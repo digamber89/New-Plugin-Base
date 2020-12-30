@@ -1,6 +1,12 @@
 <?php
 
-final class base {
+namespace Digthis\PluginBase;
+
+use Digthis\PluginBase\AdminArea\Admin;
+use Digthis\PluginBase\Frontend\Shortcodes;
+use Digthis\PluginBase\Helpers\templates;
+
+final class Bootstrap {
 	const VERSION = '1.0.0';
 	const MINIMUM_PHP_VERSION = '7.4';
 	public static $_instance = null;
@@ -8,7 +14,7 @@ final class base {
 	public $templating = null;
 
 	/**
-	 * @return base|null
+	 * @return Bootstrap|null
 	 */
 	public static function get_instance() {
 		if ( is_null( self::$_instance ) ) {
@@ -28,7 +34,7 @@ final class base {
 			return;
 		}
 		$this->autoload();
-		$this->templating = \Digthis\PluginBase\Helpers\templates::get_instance();
+		$this->templating = templates::get_instance();
 
 		add_action( 'plugins_loaded', array( $this, 'admin_init' ) );
 	}
@@ -58,14 +64,10 @@ final class base {
 	}
 
 	public function admin_init() {
-		$this->admin_area = new \Digthis\PluginBase\AdminArea\Admin();
-		new \Digthis\PluginBase\Frontend\Shortcodes();
+		$this->admin_area = new Admin();
+		new Shortcodes();
 	}
 
 }
 
-function digthisPluginBase() {
-	return base::get_instance();
-}
-
-digthisPluginBase();
+Bootstrap::get_instance();
