@@ -46,7 +46,7 @@ final class Bootstrap {
 	}
 
 	public function plugin_deactivated(){
-		delete_option('digthis_plugin_activate');
+		update_option('digthis_plugin_activate','deactivated');
 	}
 
 	public function admin_notice_minimum_php_version() {

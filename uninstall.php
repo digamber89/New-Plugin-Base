@@ -3,3 +3,5 @@
 if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 	die;
 }
+
+delete_option('digthis_plugin_activate');
