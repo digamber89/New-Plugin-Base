@@ -37,6 +37,16 @@ final class Bootstrap {
 		$this->templating = templates::get_instance();
 
 		add_action( 'plugins_loaded', array( $this, 'admin_init' ) );
+		register_activation_hook( PLUGIN_FILE_PATH, [ $this, 'plugin_activated' ] );
+		register_deactivation_hook( PLUGIN_FILE_PATH, [ $this, 'plugin_deactivated' ] );
+	}
+
+	public function plugin_activated() {
+		update_option( 'digthis_plugin_activate', 'activated' );
+	}
+
+	public function plugin_deactivated(){
+		delete_option('digthis_plugin_activate');
 	}
 
 	public function admin_notice_minimum_php_version() {
