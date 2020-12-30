@@ -20,11 +20,19 @@ class ComposerStaticInit5e9c0bc8ebb49537b5b871f118fd597e
         ),
     );
 
+    public static $classMap = array (
+        'Digthis\\PluginBase\\AdminArea\\Admin' => __DIR__ . '/../..' . '/src/AdminArea/Admin.php',
+        'Digthis\\PluginBase\\Bootstrap' => __DIR__ . '/../..' . '/src/Bootstrap.php',
+        'Digthis\\PluginBase\\Frontend\\Shortcodes' => __DIR__ . '/../..' . '/src/Frontend/Shortcodes.php',
+        'Digthis\\PluginBase\\Helpers\\templates' => __DIR__ . '/../..' . '/src/Helpers/templates.php',
+    );
+
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit5e9c0bc8ebb49537b5b871f118fd597e::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit5e9c0bc8ebb49537b5b871f118fd597e::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit5e9c0bc8ebb49537b5b871f118fd597e::$classMap;
 
         }, null, ClassLoader::class);
     }
