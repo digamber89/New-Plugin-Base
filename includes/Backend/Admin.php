@@ -84,9 +84,12 @@ class Admin {
 	 * @param $hook_suffix
 	 */
 	public function load_scripts( $hook_suffix ) {
-		$dependency = array( 'lodash', 'wp-api-fetch', 'wp-i18n', 'wp-components', 'wp-element' );
-
-		wp_register_script( 'digthis-admin-script', PLUGIN_URL_PATH . 'build/index.js', $dependency, PLUGIN_VERSION, true );
+		$script = [];
+		if ( file_exists( PLUGIN_DIR . '/build/index.asset.php' ) ) {
+			$script = include_once PLUGIN_DIR . '/build/index.asset.php';
+		}
+		$dependencies = array_unique( array_merge( $script['dependencies'], [ 'lodash', 'wp-api-fetch', 'wp-i18n', 'wp-components', 'wp-element' ] ) );
+		wp_register_script( 'digthis-admin-script', PLUGIN_URL_PATH . 'build/index.js', $dependencies, $script['version'], true );
 		wp_register_style( 'digthis-admin-style', PLUGIN_URL_PATH . 'build/style-index.css', [ 'wp-components' ], PLUGIN_VERSION );
 		wp_localize_script( 'digthis-admin-script', 'digthisAdminObj', [
 			'nonce' => wp_create_nonce( 'digthisValidateNonce' )
