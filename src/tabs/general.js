@@ -12,7 +12,7 @@ export const GeneralTab = ( props ) => {
 				<TextControl
 					label={ __( 'Setting', 'plugin-base' ) }
 					placeholder={ __( 'Enter Text', 'plugin-base' ) }
-					value={ settings && settings[ 'setting_1' ] }
+					value={ settings && settings.setting_1 }
 					onChange={ ( newVal ) =>
 						updateSettings( 'setting_1', newVal )
 					}

@@ -75,13 +75,13 @@ const AdminPanel = () => {
 					status={ notice.status }
 					onRemove={ () => {
 						setNotice( ( prevNotice ) => {
-							let newNotice = { ...prevNotice };
+							const newNotice = { ...prevNotice };
 							newNotice.show = false;
 							return newNotice;
 						} );
 					} }
 				>
-					<p>{ notice.message }</p>
+					{ notice.message }
 				</Notice>
 			</div>
 		);
@@ -114,7 +114,7 @@ const AdminPanel = () => {
 	};
 
 	return (
-		<Card size="small">
+		<Card>
 			<CardHeader>
 				<h1>{ __( 'Plugin Settings', 'plugin-base' ) }</h1>
 			</CardHeader>
