@@ -6,8 +6,9 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Digthis\\PluginBase\\AdminArea\\Admin' => $baseDir . '/src/AdminArea/Admin.php',
-    'Digthis\\PluginBase\\Bootstrap' => $baseDir . '/src/Bootstrap.php',
-    'Digthis\\PluginBase\\Frontend\\Shortcodes' => $baseDir . '/src/Frontend/Shortcodes.php',
-    'Digthis\\PluginBase\\Helpers\\templates' => $baseDir . '/src/Helpers/templates.php',
+    'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
+    'Digthis\\PluginBase\\Backend\\Admin' => $baseDir . '/includes/Backend/Admin.php',
+    'Digthis\\PluginBase\\Bootstrap' => $baseDir . '/includes/Bootstrap.php',
+    'Digthis\\PluginBase\\Frontend\\Shortcodes' => $baseDir . '/includes/Frontend/Shortcodes.php',
+    'Digthis\\PluginBase\\Helpers\\Templates' => $baseDir . '/includes/Helpers/Templates.php',
 );

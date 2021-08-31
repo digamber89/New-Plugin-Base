@@ -16,15 +16,16 @@ class ComposerStaticInit5e9c0bc8ebb49537b5b871f118fd597e
     public static $prefixDirsPsr4 = array (
         'Digthis\\PluginBase\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/src',
+            0 => __DIR__ . '/../..' . '/includes',
         ),
     );
 
     public static $classMap = array (
-        'Digthis\\PluginBase\\AdminArea\\Admin' => __DIR__ . '/../..' . '/src/AdminArea/Admin.php',
-        'Digthis\\PluginBase\\Bootstrap' => __DIR__ . '/../..' . '/src/Bootstrap.php',
-        'Digthis\\PluginBase\\Frontend\\Shortcodes' => __DIR__ . '/../..' . '/src/Frontend/Shortcodes.php',
-        'Digthis\\PluginBase\\Helpers\\templates' => __DIR__ . '/../..' . '/src/Helpers/templates.php',
+        'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
+        'Digthis\\PluginBase\\Backend\\Admin' => __DIR__ . '/../..' . '/includes/Backend/Admin.php',
+        'Digthis\\PluginBase\\Bootstrap' => __DIR__ . '/../..' . '/includes/Bootstrap.php',
+        'Digthis\\PluginBase\\Frontend\\Shortcodes' => __DIR__ . '/../..' . '/includes/Frontend/Shortcodes.php',
+        'Digthis\\PluginBase\\Helpers\\Templates' => __DIR__ . '/../..' . '/includes/Helpers/Templates.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

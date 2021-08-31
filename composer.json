@@ -12,6 +12,6 @@
   "minimum-stability": "dev",
   "require": {},
   "autoload": {
-    "psr-4": {"Digthis\\PluginBase\\": "src/"}
+    "psr-4": {"Digthis\\PluginBase\\": "includes/"}
   }
 }

@@ -6,5 +6,5 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Digthis\\PluginBase\\' => array($baseDir . '/src'),
+    'Digthis\\PluginBase\\' => array($baseDir . '/includes'),
 );

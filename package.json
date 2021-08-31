@@ -2,9 +2,14 @@
   "name": "digthis-plugin-base",
   "version": "1.0.0",
   "description": "Plugin assets base",
-  "main": "gulpfile.js",
+  "main": "build/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "wp-scripts build",
+    "format": "wp-scripts format",
+    "lint:css": "wp-scripts lint-style",
+    "lint:js": "wp-scripts lint-js",
+    "start": "wp-scripts start",
+    "packages-update": "wp-scripts packages-update"
   },
   "repository": {
     "type": "git",
@@ -20,6 +25,7 @@
   },
   "homepage": "https://github.com/digamber89/New-Plugin-Base#readme",
   "devDependencies": {
+    "@wordpress/scripts": "^18.0.0",
     "gulp": "^4.0.2",
     "gulp-wp-pot": "^2.3.6"
   }

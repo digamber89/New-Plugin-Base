@@ -2,7 +2,7 @@
 
 namespace Digthis\PluginBase;
 
-use Digthis\PluginBase\AdminArea\Admin;
+use Digthis\PluginBase\Backend\Admin;
 use Digthis\PluginBase\Frontend\Shortcodes;
 use Digthis\PluginBase\Helpers\templates;
 
@@ -34,7 +34,7 @@ final class Bootstrap {
 			return;
 		}
 		$this->autoload();
-		$this->templating = templates::get_instance();
+		$this->templating = Templates::get_instance();
 
 		add_action( 'plugins_loaded', array( $this, 'admin_init' ) );
 		register_activation_hook( PLUGIN_FILE_PATH, [ $this, 'plugin_activated' ] );

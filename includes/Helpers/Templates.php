@@ -3,7 +3,7 @@
 
 namespace Digthis\PluginBase\Helpers;
 
-class templates {
+class Templates {
 	public $theme_folder = 'plugin-base';
 	public $template_dir = PLUGIN_DIR . '/templates/';
 	public static $instance = null;
