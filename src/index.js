@@ -92,18 +92,34 @@ const AdminPanel = () => {
 			url: ajaxurl + '?action=saveDigthisAdminSettings',
 			method: 'POST',
 			data: { settings: updateSettings, nonce: digthisAdminObj.nonce },
-		} ).then( ( res ) => {
-			setIsSaving( false );
-			setSettings( res.settings );
-			setNotice( ( prevNotice ) => {
-				let updateNotice = { ...prevNotice };
-				updateNotice.show = true;
-				updateNotice.status = res.notice.status;
-				updateNotice.message = res.notice.message;
-				return updateNotice;
+		} )
+			.then( ( res ) => {
+				setIsSaving( false );
+				setSettings( res.settings );
+				setNotice( ( prevNotice ) => {
+					let updateNotice = { ...prevNotice };
+					updateNotice.show = true;
+					updateNotice.status = res.notice.status;
+					updateNotice.message = res.notice.message;
+					return updateNotice;
+				} );
+				setNeedsSave( false );
+			} )
+			.catch( ( error ) => {
+				// If the browser doesn't support AbortController then the code below will never log.
+				// However, in most cases this should be fine as it can be considered to be a progressive enhancement.
+				if ( error.name === 'AbortError' ) {
+					console.log( 'Request has been aborted' );
+				} else {
+					setIsSaving( false );
+					setNotice( {
+						show: true,
+						status: 'error',
+						message: 'Settings could not be saved!',
+					} );
+					setNeedsSave( true );
+				}
 			} );
-			setNeedsSave( true );
-		} );
 	};
 
 	const updateSettingsState = ( key, val ) => {

@@ -19,7 +19,6 @@ class Admin {
 		return self::$instance;
 	}
 
-
 	/**
 	 *
 	 */
