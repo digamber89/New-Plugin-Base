@@ -10,7 +10,6 @@ final class Bootstrap {
 	const VERSION = '1.0.0';
 	const MINIMUM_PHP_VERSION = '7.4';
 	public static $_instance = null;
-	private $admin_area = null;
 	public $templating = null;
 
 	/**
@@ -42,11 +41,12 @@ final class Bootstrap {
 	}
 
 	public function plugin_activated() {
+		//other plugins can get this option and check if plugin is activated
 		update_option( 'digthis_plugin_activate', 'activated' );
 	}
 
-	public function plugin_deactivated(){
-		update_option('digthis_plugin_activate','deactivated');
+	public function plugin_deactivated() {
+		delete_option( 'digthis_plugin_activate' );
 	}
 
 	public function admin_notice_minimum_php_version() {
@@ -74,8 +74,8 @@ final class Bootstrap {
 	}
 
 	public function admin_init() {
-		$this->admin_area = new Admin();
-		new Shortcodes();
+		Admin::get_instance();
+		Shortcodes::get_instance();
 	}
 
 }

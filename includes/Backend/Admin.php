@@ -7,6 +7,11 @@ class Admin {
 	public $settings = '';
 	public $admin_page_url = 'plugin-url';
 	public $menu_page = '';
+	public $default_settings
+		= [
+			'settings_1'      => '',
+			'fixedBackground' => false
+		];
 
 	/**
 	 * @return Admin
@@ -34,7 +39,7 @@ class Admin {
 
 	public function getSettings() {
 		$settings = get_option( 'digthisAdminSettings' );
-		$settings = ! empty( $settings ) ? $settings : [ 'setting_1' => '', 'fixedBackground' => true ];
+		$settings = ! empty( $settings ) ? $settings : $this->default_settings;
 		wp_send_json( $settings );
 	}
 
