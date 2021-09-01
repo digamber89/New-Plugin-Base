@@ -7,6 +7,7 @@ class Admin {
 	public $settings = '';
 	public $admin_page_url = 'plugin-url';
 	public $menu_page = '';
+	public $options_name = 'digthisAdminSettings';
 	public $default_settings
 		= [
 			'settings_1'      => '',
@@ -38,7 +39,7 @@ class Admin {
 	}
 
 	public function getSettings() {
-		$settings = get_option( 'digthisAdminSettings' );
+		$settings = get_option( $this->options_name );
 		$settings = ! empty( $settings ) ? $settings : $this->default_settings;
 		wp_send_json( $settings );
 	}
@@ -63,7 +64,7 @@ class Admin {
 			return;
 		}
 
-		update_option( 'digthisAdminSettings', $posted_data['settings'] );
+		update_option( $this->options_name, $posted_data['settings'] );
 		wp_send_json( [
 			'settings' => $posted_data['settings'],
 			'notice'   => [

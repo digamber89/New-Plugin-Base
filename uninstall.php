@@ -9,4 +9,5 @@ $option_keys = [
 
 foreach ( $option_keys as $option_key ) {
 	delete_option( 'digthis_plugin_activate' );
+	delete_option( 'digthisAdminSettings' );
 }
