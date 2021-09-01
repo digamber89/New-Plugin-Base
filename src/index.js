@@ -142,35 +142,37 @@ const AdminPanel = () => {
                 {(!Object.keys(settings).length || isSaving) && (
                     <Spinner/>
                 )}
+                {Object.keys(settings).length > 0 && (
+                    <div style={isSaving ? {pointerEvents: "none"} : {}}>
+                        <TabPanel
+                            className="my-tab-panel"
+                            activeClass="active-tab"
+                            initialTabName={initialTab}
+                            tabs={tabs}
+                            onSelect={(tabName) => setInitialTab(tabName)}
+                        >
+                            {(tab) => {
+                                if ('general' === tab.name) {
+                                    return (
+                                        <GeneralTab
+                                            settings={settings}
+                                            updateSettings={updateSettingsState}
+                                        />
+                                    );
+                                } else if ('advanced' === tab.name) {
+                                    // setInitialTab('advanced');
+                                    return (
+                                        <AdvancedTab
+                                            settings={settings}
+                                            updateSettings={updateSettingsState}
+                                        />
+                                    );
+                                }
+                                return '';
+                            }}
+                        </TabPanel>
+                    </div>
 
-                {!isSaving && Object.keys(settings).length > 0 && (
-                    <TabPanel
-                        className="my-tab-panel"
-                        activeClass="active-tab"
-                        initialTabName={initialTab}
-                        tabs={tabs}
-                    >
-                        {(tab) => {
-                            if ('general' === tab.name) {
-                                // setInitialTab('general');
-                                return (
-                                    <GeneralTab
-                                        settings={settings}
-                                        updateSettings={updateSettingsState}
-                                    />
-                                );
-                            } else if ('advanced' === tab.name) {
-                                // setInitialTab('advanced');
-                                return (
-                                    <AdvancedTab
-                                        settings={settings}
-                                        updateSettings={updateSettingsState}
-                                    />
-                                );
-                            }
-                            return '';
-                        }}
-                    </TabPanel>
                 )}
             </CardBody>
             <CardDivider/>

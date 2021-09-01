@@ -1830,14 +1830,18 @@ const AdminPanel = () => {
     setNeedsSave(true);
   };
 
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(Card, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(CardHeader, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", null, __('Plugin Settings', 'plugin-base'))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(CardBody, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(PluginNotice, null), (!Object.keys(settings).length || isSaving) && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(Spinner, null), !isSaving && Object.keys(settings).length > 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(TabPanel, {
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(Card, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(CardHeader, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", null, __('Plugin Settings', 'plugin-base'))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(CardBody, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(PluginNotice, null), (!Object.keys(settings).length || isSaving) && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(Spinner, null), Object.keys(settings).length > 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    style: isSaving ? {
+      pointerEvents: "none"
+    } : {}
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(TabPanel, {
     className: "my-tab-panel",
     activeClass: "active-tab",
     initialTabName: initialTab,
-    tabs: tabs
+    tabs: tabs,
+    onSelect: tabName => setInitialTab(tabName)
   }, tab => {
     if ('general' === tab.name) {
-      // setInitialTab('general');
       return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tabs_general__WEBPACK_IMPORTED_MODULE_2__.GeneralTab, {
         settings: settings,
         updateSettings: updateSettingsState
@@ -1851,7 +1855,7 @@ const AdminPanel = () => {
     }
 
     return '';
-  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(CardDivider, null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(CardFooter, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(Button, {
+  }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(CardDivider, null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(CardFooter, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(Button, {
     className: 'button button-large button-primary',
     onClick: () => {
       setIsSaving(true);
@@ -1959,8 +1963,10 @@ const GeneralTab = props => {
     label: __('Setting', 'plugin-base'),
     placeholder: __('Enter Text', 'plugin-base'),
     value: settings && settings.setting_1,
-    onChange: newVal => //carefull if you set this wrong then you;ll have errors    
-    updateSettings('setting_1', newVal)
+    onChange: newVal => {
+      //carefull if you set this wrong then you;ll have errors    
+      updateSettings('setting_1', newVal);
+    }
   })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(CardDivider, null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(CardBody, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_select__WEBPACK_IMPORTED_MODULE_1__.default //alright for now lets take the option of saving the options as key value pair.
   //default option should be {label:'Chocholate','value':'chocolate'} format
   , {

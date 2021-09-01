@@ -19,9 +19,10 @@ export const GeneralTab = (props) => {
                     label={__('Setting', 'plugin-base')}
                     placeholder={__('Enter Text', 'plugin-base')}
                     value={settings && settings.setting_1}
-                    onChange={(newVal) =>
+                    onChange={(newVal) => {
                         //carefull if you set this wrong then you;ll have errors    
-                        updateSettings('setting_1', newVal)
+                        updateSettings('setting_1', newVal);
+                    }
                     }
                 />
             </CardBody>
