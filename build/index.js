@@ -1830,7 +1830,7 @@ const AdminPanel = () => {
     setNeedsSave(true);
   };
 
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(Card, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(CardHeader, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", null, __('Plugin Settings', 'plugin-base'))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(CardBody, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(PluginNotice, null), (!Object.keys(settings).length || isSaving) && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(Spinner, null), Object.keys(settings).length > 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(Card, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(CardHeader, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", null, __('Plugin Settings', 'plugin-base'))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(CardBody, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(PluginNotice, null), !Object.keys(settings).length && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(Spinner, null), Object.keys(settings).length > 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     style: isSaving ? {
       pointerEvents: "none"
     } : {}
@@ -1855,7 +1855,7 @@ const AdminPanel = () => {
     }
 
     return '';
-  }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(CardDivider, null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(CardFooter, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(Button, {
+  }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(CardDivider, null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(CardFooter, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, isSaving && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(Spinner, null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(Button, {
     className: 'button button-large button-primary',
     onClick: () => {
       setIsSaving(true);
@@ -1863,7 +1863,7 @@ const AdminPanel = () => {
     },
     disabled: !needSave || isSaving,
     isPrimary: true
-  }, __('Save', 'plugin-base'))));
+  }, !isSaving && __('Save', 'plugin-base'), isSaving && __('Saving...', 'plugin-base')))));
 };
 
 document.addEventListener('DOMContentLoaded', () => {

@@ -139,7 +139,7 @@ const AdminPanel = () => {
             </CardHeader>
             <CardBody>
                 <PluginNotice/>
-                {(!Object.keys(settings).length || isSaving) && (
+                {(!Object.keys(settings).length) && (
                     <Spinner/>
                 )}
                 {Object.keys(settings).length > 0 && (
@@ -177,17 +177,21 @@ const AdminPanel = () => {
             </CardBody>
             <CardDivider/>
             <CardFooter>
-                <Button
-                    className={'button button-large button-primary'}
-                    onClick={() => {
-                        setIsSaving(true);
-                        savePluginSettings(settings);
-                    }}
-                    disabled={!needSave || isSaving}
-                    isPrimary
-                >
-                    {__('Save', 'plugin-base')}
-                </Button>
+                <div>
+                    {isSaving && <Spinner/>}
+                    <Button
+                        className={'button button-large button-primary'}
+                        onClick={() => {
+                            setIsSaving(true);
+                            savePluginSettings(settings);
+                        }}
+                        disabled={!needSave || isSaving}
+                        isPrimary
+                    >
+                        {!isSaving && __('Save', 'plugin-base')}
+                        {isSaving && __('Saving...', 'plugin-base')}
+                    </Button>
+                </div>
             </CardFooter>
         </Card>
     );
