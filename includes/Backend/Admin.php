@@ -10,7 +10,7 @@ class Admin {
 	public $options_name = 'digthisAdminSettings';
 	public $default_settings
 		= [
-			'setting_1'      => '1',
+			'setting_1'       => '1',
 			'fixedBackground' => false,
 			'flavor'          => ''
 		];
@@ -36,8 +36,33 @@ class Admin {
 
 		add_action( 'wp_ajax_getDigthisAdminSettings', [ $this, 'getSettings' ] );
 		add_action( 'wp_ajax_saveDigthisAdminSettings', [ $this, 'saveSettings' ] );
+		add_action( 'wp_ajax_digthisGetPosts', [ $this, 'getPosts' ] );
 
 	}
+
+	public function getPosts() {
+		$response     = [];
+		//$request_data = json_decode( file_get_contents( 'php://input' ), true );
+		$search = filter_input(INPUT_GET,'search');
+		$args = [
+			'post_type' => 'post',
+			'status'    => 'publish',
+			's'         => $search
+		];
+
+		$posts = new \WP_Query($args);
+		while ( $posts->have_posts() ):$posts->the_post();
+			$response[] = [
+				'label' => get_the_title(),
+				'value' => get_the_ID()
+			];
+		endwhile;
+		wp_reset_postdata();
+
+		wp_send_json( $response );
+
+	}
+
 
 	public function getSettings() {
 		$settings = get_option( $this->options_name );

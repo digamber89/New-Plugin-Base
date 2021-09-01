@@ -1,4 +1,8 @@
 #plugin-base-admin-settings {
+  .settings-container {
+    min-height: 400px;
+  }
+
   .components {
     &-tab-panel {
       &__tabs {
