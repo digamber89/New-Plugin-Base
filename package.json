@@ -28,5 +28,8 @@
     "@wordpress/scripts": "^18.0.0",
     "gulp": "^4.0.2",
     "gulp-wp-pot": "^2.3.6"
+  },
+  "dependencies": {
+    "react-select": "^4.3.1"
   }
 }

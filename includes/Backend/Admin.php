@@ -10,8 +10,9 @@ class Admin {
 	public $options_name = 'digthisAdminSettings';
 	public $default_settings
 		= [
-			'settings_1'      => '',
-			'fixedBackground' => false
+			'setting_1'      => '1',
+			'fixedBackground' => false,
+			'flavor'          => ''
 		];
 
 	/**
