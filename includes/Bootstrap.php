@@ -3,7 +3,7 @@
 namespace Digthis\PluginBase;
 
 use Digthis\PluginBase\Backend\Admin;
-use Digthis\PluginBase\Frontend\Shortcodes;
+use Digthis\PluginBase\Main\Shortcodes;
 use Digthis\PluginBase\Helpers\templates;
 
 final class Bootstrap {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Digthis\PluginBase\Frontend;
+namespace Digthis\PluginBase\Main;
 
 use Digthis\PluginBase\Helpers\Templates;
 
@@ -36,8 +36,11 @@ class Shortcodes {
 			'posts_per_page' => $atts['posts_per_page']
 		);
 		$posts      = new \WP_Query( $query_args );
+		ob_start();
 		if ( $posts->have_posts() ) {
 			Templates::get_instance()->include_file( 'shortcode.php', [ 'posts' => $posts ] );
 		}
+
+		return ob_get_clean();
 	}
 }

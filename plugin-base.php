@@ -6,7 +6,7 @@
  * Author: Digamber Pradhan
  * Author URI: https://www.digamberpradhan.com/
  * Version: 1.0.0
- * Requires at least: 5.6
+ * Requires at least: 5.5
  * Requires PHP:      7.2
  * License: http://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html
  * Text Domain: plugin-base
