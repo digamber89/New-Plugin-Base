@@ -63,7 +63,8 @@ export const GeneralTab = ( props ) => {
 					Select Featured Post
 					<AsyncSelect
 						cacheOptions={ true }
-						defaultOptions
+						defaultOptions={ settings && settings.selectedPost }
+						defaultValue={ settings && settings.selectedPost }
 						isClearable
 						loadOptions={ debounce( promiseOptions, 800 ) }
 						onChange={ ( input, { action } ) => {

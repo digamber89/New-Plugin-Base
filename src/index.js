@@ -87,7 +87,10 @@ const AdminPanel = () => {
 		);
 	};
 	const savePluginSettings = ( updateSettings ) => {
-		// apiFetch.use( apiFetch.createNonceMiddleware( nonce ) );
+		setNotice( ( prevNotice ) => {
+			const newNotice = { show: false };
+			return { ...prevNotice, ...newNotice };
+		} );
 		apiFetch( {
 			url: ajaxurl + '?action=saveDigthisAdminSettings',
 			method: 'POST',
@@ -97,12 +100,19 @@ const AdminPanel = () => {
 				setIsSaving( false );
 				setSettings( res.settings );
 				setNotice( ( prevNotice ) => {
-					let updateNotice = { ...prevNotice };
-					updateNotice.show = true;
-					updateNotice.status = res.notice.status;
-					updateNotice.message = res.notice.message;
-					return updateNotice;
+					const updateNotice = {
+						show: true,
+						status: res.notice.status,
+						message: res.notice.message,
+					};
+					return { ...prevNotice, ...updateNotice };
 				} );
+				setTimeout( function () {
+					setNotice( ( prevNotice ) => {
+						const newNotice = { show: false };
+						return { ...prevNotice, ...newNotice };
+					} );
+				}, 5000 );
 				setNeedsSave( false );
 			} )
 			.catch( ( error ) => {
