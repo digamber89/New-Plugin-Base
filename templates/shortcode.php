@@ -1,3 +1,8 @@
+<?php
+if ( ! isset( $args['posts'] ) )
+	return
+?>
+
 <div class="plugin-base-posts">
 	<?php
 	while ( $args['posts']->have_posts() ): $args['posts']->the_post();

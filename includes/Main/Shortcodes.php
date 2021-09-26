@@ -1,9 +1,16 @@
 <?php
 
-namespace Digthis\PluginBase\Frontend;
+namespace Digthis\PluginBase\Main;
+
+use Digthis\PluginBase\Helpers\Templates;
 
 class Shortcodes {
 	public static $count;
+	public static $instance = null;
+
+	public static function get_instance() {
+		return is_null( self::$instance ) ? new self() : self::$instance;
+	}
 
 	/**
 	 * @return mixed
@@ -16,7 +23,7 @@ class Shortcodes {
 	 * Shortcodes constructor.
 	 */
 	public function __construct() {
-		add_shortcode( 'plugin_shortcode', array( $this, 'render_shortcode' ) );
+		add_shortcode( 'plugin_shortcode_placeholder', array( $this, 'render_shortcode' ) );
 	}
 
 	public function render_shortcode( $atts ) {
@@ -29,8 +36,11 @@ class Shortcodes {
 			'posts_per_page' => $atts['posts_per_page']
 		);
 		$posts      = new \WP_Query( $query_args );
+		ob_start();
 		if ( $posts->have_posts() ) {
-			digthisPluginBase()->templating->include_file( 'shortcode.php', [ 'posts' => $posts  ] );
+			Templates::get_instance()->include_file( 'shortcode.php', [ 'posts' => $posts ] );
 		}
+
+		return ob_get_clean();
 	}
 }

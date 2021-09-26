@@ -1,0 +1,64 @@
+#plugin-base-admin-settings {
+  .settings-container {
+    min-height: 400px;
+  }
+
+  .components {
+    &-tab-panel {
+      &__tabs {
+        margin-bottom: -1px;
+
+        .components-button {
+          border-width: 1px;
+          border-color: #ddd;
+          border-style: solid;
+          font-size: 14px;
+          font-weight: 600;
+          color: #444;
+
+          &:focus {
+            box-shadow: none;
+          }
+
+          &:not(:last-of-type) {
+            margin-right: 5px;
+          }
+
+
+          &.active-tab {
+            border-color: #007cba #ddd #fff;
+          }
+
+        }
+      }
+
+      &__tabs-item {
+        background: transparent;
+        border: none;
+        box-shadow: none;
+        border-radius: 0;
+        cursor: pointer;
+        height: 48px;
+        padding: 3px 16px;
+        margin-left: 0;
+        font-weight: 500;
+        transition: box-shadow .1s linear;
+        box-sizing: border-box;
+      }
+
+      &__tab-content {
+        border: 1px solid #ddd;
+
+        .components {
+          &-base-control__label {
+            display: block;
+          }
+        }
+      }
+    }
+
+    &-notice {
+      margin-bottom: 25px;
+    }
+  }
+}
